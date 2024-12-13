@@ -1,0 +1,30 @@
+---
+
+- name: Linux 시스템 점검 자동화
+  hosts: all
+  become: yes
+  tasks:
+    - name: os 버전 정보 확인
+      ansible.builtin.command: cat /etc/redhat-release
+      register: os_info
+
+    - name: cpu 사용량 확인
+      ansible.builtin.shell: "top -bn1 | grep 'Cpu(s)' | awk '{print $2 + $4}'"
+      register: cpu_usage
+
+    - name: 디스크 사용량 확인
+      ansible.builtin.shell: df -h / | awk 'NR==2 {print $5}'
+      register: disk_usage
+
+    - name: 메모리 사용량 확인
+      ansible.builtin.shell: free -h / | awk 'NR==2 {print $5}'
+      register: memory_usage
+
+    - name: 결과출력
+      ansible.builtin.debug:
+        msg: |
+          Summary Report:
+          OS 정보: {{ os_info.stdout }}
+          CPU 점유율: {{ cpu_usage.stdout }}%
+          디스크 사용량: {{ disk_usage.stdout }}
+          사용 중 메모리: {{ memory_usage.stdout }}

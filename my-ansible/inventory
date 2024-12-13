@@ -1,0 +1,4 @@
+worker
+
+[all:vars]
+user=ansible
