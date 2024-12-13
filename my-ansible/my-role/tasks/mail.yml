@@ -1,9 +1,0 @@
----
-
-#tasks file for my-role
-
-- name: install service {{ service_title }}
-  ansible.builtin.dnf:
-    name: "{{ item }}"
-    state: latest
-  loop:
