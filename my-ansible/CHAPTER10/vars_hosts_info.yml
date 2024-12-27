@@ -1,0 +1,4 @@
+tnodes:
+  - hostname: worker
+    fqdn: worker-rocky.exp.com
+    net_ip: 192.168.35.24

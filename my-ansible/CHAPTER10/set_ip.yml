@@ -1,0 +1,20 @@
+---
+
+- hosts: worker
+  vars: 
+    fedora_os:
+      - CentOS
+      - RedHat
+      - Rocky
+    net_info:
+      - con_name: enp0s3
+        ip_addr: 192.168.35.24/24
+        ip_gw: 192.168.35.1
+        ip_dns: 192.168.35.1
+
+  tasks:
+  - name: Include role in Rocky and CentOS and RedHat
+    ansible.builtin.include_role:
+      name: myrole.nmcli
+    when: ansible_facts.distribution in fedora_os
+
