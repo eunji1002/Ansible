@@ -1,0 +1,5 @@
+---
+# vars file for myroles.nfs_client
+
+dnf_nfs_packages:
+  - nfs-utils

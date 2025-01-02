@@ -1,0 +1,22 @@
+---
+# tasks file for myroles.nfs_client
+
+- name: Install NFS Packages on Rocky
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ dnf_nfs_packages }}"
+  when: ansible_facts.distribution == "Rocky"
+
+- name: Create Mount Directory
+  ansible.builtin.file:
+    path: "{{ mount_path }}"
+    state: directory
+
+- name: Mount NFS
+  ansible.posix.mount:
+    src: "{{ share_server }}:{{ share_path }}"
+    path: "{{ mount_path }}"
+    opts: rw,sync
+    state: mounted
+    fstype: nfs

@@ -1,0 +1,5 @@
+---
+
+share_server: localhost
+share_path: /mnt/nfs_shares
+mount_path: /mnt/nfs_data
