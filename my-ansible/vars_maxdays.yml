@@ -1,0 +1,8 @@
+---
+
+
+Userinfo: 
+  - username: ansible
+    maxdays: 90
+  - username: stack
+    maxdays: 90 
