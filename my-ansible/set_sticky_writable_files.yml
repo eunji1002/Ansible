@@ -1,0 +1,44 @@
+---
+- hosts: worker
+  tasks:
+  - name: Find Sticky bit files
+    ansible.builtin.shell: |
+      find / -xdev -perm -04000 -o -perm -02000 -o -perm 01000 \
+      | grep -e 'dump$' \
+             -e 'lp* -lpd%' \
+             -e 'newgrp$' \
+             -e 'restore$' \
+             -e 'at$' \
+             -e 'traceroute$' | xargs ls
+    register: sfile_list
+    failed_when: false
+
+  - name: Find World Writable files
+    ansible.builtin.shell: |
+      find / -xdev -perm -2 -ls \
+      | grep -v 'l..........' | awk '{print $NF}'
+    register: wfile_list
+    failed_when: false
+
+  - name: Debug Sticky bit files
+    ansible.builtin.debug:
+      msg: "Sticky bit files found: {{ sfile_list.stdout_lines | join(', ') }}"
+
+  - name: Debug World Writable files
+    ansible.builtin.debug:
+      msg: "World Writable files found: {{ wfile_list.stdout_lines | join(', ') }}"
+
+  - name: Remove Sticky bit from files
+    ansible.builtin.file:
+      path: "{{ item }}"
+      mode: "u-s,g-s,o-s"
+    loop: "{{ sfile_list.stdout_lines | default([]) }}"
+    when: sfile_list.stdout_lines is defined and sfile_list.stdout_lines | length > 0
+
+  - name: Remove World Writable permission from files
+    ansible.builtin.file:
+      path: "{{ item }}"
+      mode: "o-w"
+    loop: "{{ wfile_list.stdout_lines | default([]) }}"
+    when: wfile_list.stdout_lines is defined and wfile_list.stdout_lines | length > 0
+
