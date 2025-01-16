@@ -1,38 +1,16 @@
-Role Name
-=========
+사설 인증서의 주요 역할
+1. 암호화된 통신 제공
+2. 서버와 클라이언트 인증
+3. 데이터 무결성 보장
+4. 내부 테스트 및 개발
 
-A brief description of the role goes here.
+사설 인증서를 사용하는 이유
+1. 비용 절감: 공인 인증서를 발급받는 데 드는 비용을 절약할 수 있습니다.
+2. 내부 사용: 외부에서 접근할 필요가 없는 내부 시스템에서는 사설 인증서로 충분합니다.
+3. 테스트 환경: 개발 단계에서 HTTPS 통신이나 보안 관련 기능을 검증하는 데 적합합니다.
 
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
-
-Role Variables
---------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+사설 인증서 활용 사례
+- 사내 시스템의 HTTPS 통신
+- VPN 서버
+- 데이터베이스와 애플리케이션 간 암호화
+- CI/CD 파이프라인에서의 보안 통신 테스트
