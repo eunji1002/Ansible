@@ -1,0 +1,7 @@
+---
+
+
+log_directory: /home/ansible/logs
+packages:
+  - dstat
+  - sysstat
