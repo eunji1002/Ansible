@@ -1,0 +1,7 @@
+---
+
+- hosts: worker
+  roles:
+    - role: geerlingguy.java
+    - role: geerlingguy.elasticsearch
+    - role: geerlingguy.kibana
