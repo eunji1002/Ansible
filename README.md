@@ -1,2 +1,3 @@
 # Ansible
 앤서블로 시작하는 인프라 자동화 실습
+ATLASSIAN SYNC TEST
